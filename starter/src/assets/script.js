@@ -1,5 +1,6 @@
 /* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
 let products = [];
+let totalPaid = 0;
 
 /* Create 3 or more product objects using object literal notation 
    Each product should include five properties
@@ -116,7 +117,8 @@ function emptyCart() {
 */
 
 function pay(amount) {
-  return amount - cartTotal();
+    totalPaid = amount;
+    return totalPaid- cartTotal();
 }
 
 
