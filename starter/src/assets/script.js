@@ -115,21 +115,32 @@ function emptyCart() {
   - pay will return a positive number if money should be returned to customer
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
-
 function pay(amount) {
-    totalPaid = amount;
-    return totalPaid- cartTotal();
+  totalPaid += amount;
+  let remainingBalance = cartTotal() - totalPaid;
+  return remainingBalance >= 0 ? -remainingBalance : Math.abs(remainingBalance);
+}
+/* Create a function named currency that takes in a currency type as an argument
+  - currency will return the cart total formatted in the correct currency
+  - currency should use the currency parameter to determine the currency symbol
+  - currency should return the correct currency format based on the currency parameter
+  - currency should default to US currency
+  Hint: toFixed() will be useful for this function
+*/
+function currency(currencyType = "USD") {
+  let total = cartTotal();
+  switch (currencyType) {
+    case "USD":
+      return "$" + total.toFixed(2);
+    case "EUR":
+      return "€" + total.toFixed(2);
+    case "GBP":
+      return "£" + total.toFixed(2);
+    default:
+      return "$" + total.toFixed(2);
+  }
 }
 
-
-/* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
-
-
-/* The following is for running unit tests. 
-   To fully complete this project, it is expected that all tests pass.
-   Run the following command in terminal to run tests
-   npm run test
-*/
 
 module.exports = {
    products,
@@ -141,6 +152,5 @@ module.exports = {
    cartTotal,
    pay, 
    emptyCart,
-   /* Uncomment the following line if completing the currency converter bonus */
-   // currency
+   currency
 }
