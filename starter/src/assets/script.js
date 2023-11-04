@@ -117,16 +117,14 @@ function emptyCart() {
 */
 function pay(amount) {
   totalPaid += amount;
-  let remainingBalance = cartTotal() - totalPaid;
-  return remainingBalance >= 0 ? -remainingBalance : Math.abs(remainingBalance);
+  let remainingBalance = totalPaid - cartTotal();
+  if (remainingBalance >= 0) {
+    emptyCart();
+    return remainingBalance;
+  }
+  return remainingBalance;
 }
-/* Create a function named currency that takes in a currency type as an argument
-  - currency will return the cart total formatted in the correct currency
-  - currency should use the currency parameter to determine the currency symbol
-  - currency should return the correct currency format based on the currency parameter
-  - currency should default to US currency
-  Hint: toFixed() will be useful for this function
-*/
+
 function currency(currencyType = "USD") {
   let total = cartTotal();
   switch (currencyType) {
